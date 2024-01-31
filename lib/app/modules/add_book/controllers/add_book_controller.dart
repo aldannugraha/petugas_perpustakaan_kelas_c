@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:petugas_perpustakaan_kelas_c/app/modules/book/controllers/book_controller.dart';
 import 'package:petugas_perpustakaan_kelas_c/app/routes/app_pages.dart';
 
 import '../../../data/constant/endpoint.dart';
@@ -16,6 +17,7 @@ class AddBookController extends GetxController {
   final loading = false.obs;
 
   final count = 0.obs;
+  final BookController _bookController = Get.find();
 
   @override
   void onInit() {
@@ -46,6 +48,8 @@ class AddBookController extends GetxController {
           "tahun_terbit": int.parse(tahun_terbitController.text.toString()),
         });
         if (response.statusCode == 201) {
+          _bookController.GetData();
+          Get.back();
           Get.offAllNamed(Routes.BOOK);
           Get.snackbar("Berhasil", "Menambahkan Buku",
               backgroundColor: Colors.green);
