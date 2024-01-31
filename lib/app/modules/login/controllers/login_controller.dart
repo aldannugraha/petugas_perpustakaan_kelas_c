@@ -46,6 +46,7 @@ class LoginController extends GetxController {
                 "password" : passwordController.text.toString()}));
 
       if(response.statusCode == 200){
+
         await StorageProvider.write(StorageKey.status, "logged");
         Get.offAllNamed(Routes.HOME);
       }else{
